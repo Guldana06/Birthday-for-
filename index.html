@@ -4,18 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>С Днем рождения!</title>
-    <!-- Подключаем красивый шрифт -->
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Подключаем библиотеку конфетти для фейерверков -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
             min-height: 100vh;
@@ -23,10 +16,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
             color: #fff;
         }
-
         .container {
             text-align: center;
             background: rgba(255, 255, 255, 0.2);
@@ -34,19 +25,9 @@
             border: 2px solid rgba(255, 255, 255, 0.4);
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
             max-width: 450px;
             width: 90%;
         }
-
-        h1 {
-            font-size: 22px;
-            margin-bottom: 20px;
-            color: #fff;
-            text-shadow: 2px 2px #ff4081;
-        }
-
-        /* Контейнер для фотографий */
         .slider-container {
             position: relative;
             width: 200px;
@@ -57,49 +38,19 @@
             border: 4px solid #fff;
             box-shadow: 0 0 20px rgba(255, 64, 129, 0.6);
         }
-
-        .slider-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none; /* Скрываем все фото по умолчанию */
-        }
-
-        .slider-container img.active {
-            display: block; /* Показываем только активную фотографию */
-        }
-
-        /* Кнопка переключения */
+        .slider-container img { width: 100%; height: 100%; object-fit: cover; display: none; }
+        .slider-container img.active { display: block; }
         .slide-btn {
-            background: #ff4081;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 16px;
-            font-family: 'Comfortaa', cursive;
-            font-weight: bold;
-            border-radius: 25px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 64, 129, 0.4);
-            transition: transform 0.2s, background 0.2s;
-            margin-top: 10px;
+            background: #ff4081; color: white; border: none; padding: 12px 24px;
+            font-size: 16px; font-family: 'Comfortaa', cursive; font-weight: bold;
+            border-radius: 25px; cursor: pointer; transition: 0.2s; margin-top: 10px;
         }
-
-        .slide-btn:hover {
-            background: #e91e63;
-            transform: scale(1.05);
-        }
-
+        .slide-btn:hover { background: #e91e63; transform: scale(1.05); }
         .message-box {
             background: rgba(255, 255, 255, 0.3);
-            padding: 15px;
-            border-radius: 12px;
-            margin-top: 20px;
-            font-size: 14px;
-            line-height: 1.5;
-            color: #4a2832;
-            font-weight: bold;
-            min-height: 50px;
+            padding: 15px; border-radius: 12px; margin-top: 20px;
+            font-size: 15px; line-height: 1.5; color: #4a2832; font-weight: bold;
+            min-height: 80px; display: flex; align-items: center; justify-content: center;
         }
     </style>
 </head>
@@ -108,7 +59,6 @@
     <div class="container">
         <h1>С Днем Рождения! 🎉</h1>
 
-        <!-- Галерея из 7 фото -->
         <div class="slider-container">
             <img src="photo1.jpg" class="active" alt="Фото 1">
             <img src="photo2.jpg" alt="Фото 2">
@@ -119,78 +69,12 @@
             <img src="photo7.jpg" alt="Фото 7">
         </div>
 
-        <!-- Кнопка "Вперед", к которой привязан твой скрипт -->
         <button class="slide-btn" id="next-btn">Следующее фото ✨</button>
 
-        <!-- Блок для подписей к фото -->
         <div class="message-box" id="message-text">
-            Листай воспоминания и улыбайся! Каждая фотография — особенная ✨
+            Вы восхитительны! Листайте дальше, чтобы увидеть все моменты ✨
         </div>
     </div>
 
-    <script>
-        let currentIndex = 0;
-        const TOTAL_PHOTOS = 7;
-        const photos = document.querySelectorAll('.slider-container img');
-        const messageText = document.getElementById('message-text');
-
-        // Подписи для каждой фотографии (можешь поменять текст под себя)
-        const messages = [
-            "Листай воспоминания и улыбайся! Каждая фотография — особенная ✨",
-            "Самые яркие моменты вместе! 💖",
-            "Твоя улыбка просто вау! 😊",
-            "Здесь вообще отдельная история 😄",
-            "Ты умеешь делать этот мир лучше и светлее 🌟",
-            "Столько крутых воспоминаний! 🔥",
-            "Ура! Ты дошла до конца! С праздником тебя! 🥳🎊"
-        ];
-
-        // Функция обновления контента галереи
-        function updateContent() {
-            photos.forEach(photo => photo.classList.remove('active'));
-            photos[currentIndex].classList.add('active');
-            messageText.textContent = messages[currentIndex];
-        }
-
-        // Функция запуска салюта из конфетти
-        function triggerFireworks(isFinal) {
-            const confettiColors = ['#ff69b4', '#fff'];
-            if (isFinal) {
-                var duration = 3 * 1000;
-                var end = Date.now() + duration;
-
-                (function frame() {
-                    confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: confettiColors });
-                    confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: confettiColors });
-                    if (Date.now() < end) {
-                        requestAnimationFrame(frame);
-                    }
-                }());
-            } else {
-                confetti({
-                    particleCount: 50,
-                    spread: 60,
-                    origin: { y: 0.7 },
-                    colors: ['#ff69b4']
-                });
-            }
-        }
-
-        // Обработчик клика по кнопке
-        document.getElementById('next-btn').addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % TOTAL_PHOTOS;
-            updateContent();
-            triggerFireworks(currentIndex === TOTAL_PHOTOS - 1);
-        });
-
-        // Дополнительно: листание стрелками на клавиатуре
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-                currentIndex = (currentIndex + 1) % TOTAL_PHOTOS;
-                updateContent();
-                triggerFireworks(currentIndex === TOTAL_PHOTOS - 1);
-            }
-        });
-    </script>
 </body>
 </html>
